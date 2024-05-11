@@ -13,18 +13,17 @@ namespace StayEase.Database.DB
 
 			// Ініціалізувати ролі
 			InitializeRoles(roleManager);
-		
 
+			InitializeUsers(userManager);
 		}
 
 		private static void InitializeRoles(RoleManager<IdentityRole> roleManager)
 		{
-		
-			string[] roleNames = {  "Client", "Provider" };
+			// Додайте ваші ролі, якщо потрібно
+			string[] roleNames = { "Admin", "User" };
 
 			foreach (var roleName in roleNames)
 			{
-				// Перевірка, чи існує роль
 				var roleExists = roleManager.RoleExistsAsync(roleName).Result;
 
 				if (!roleExists)
@@ -37,5 +36,27 @@ namespace StayEase.Database.DB
 				}
 			}
 		}
+
+		private static void InitializeUsers(UserManager<UserModel> userManager)
+		{
+			// Додайте вашого адміністратора, якщо потрібно
+			var adminUser = new UserModel
+			{
+				UserName = "Admin_1",
+				Email = "admin@example.com"
+			};
+
+			var adminUserExists = userManager.FindByEmailAsync(adminUser.Email).Result;
+
+			if (adminUserExists == null)
+			{
+				var result = userManager.CreateAsync(adminUser, "Admin1!").Result;
+				if (result.Succeeded)
+				{
+					userManager.AddToRoleAsync(adminUser, "Admin").Wait();
+				}
+			}
+		}
 	}
 }
+

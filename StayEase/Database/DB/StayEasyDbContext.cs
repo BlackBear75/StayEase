@@ -14,9 +14,23 @@ namespace StayEase.Database.DB
 			Database.EnsureCreated();
 		}
 
-		public DbSet<AccommodationModel> AccommodationModels { get; set; }
-		public DbSet<BookingModel> BookingModels { get; set; }
+		public DbSet<Model.Entity.AccommodationModel.AccommodationModel> AccommodationModels { get; set; }
+		public DbSet<Model.Entity.Booking.BookingModel> BookingModels { get; set; }
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			base.OnModelCreating(modelBuilder);
+			modelBuilder.Entity<UserModel>(entity =>
+			{
+				entity.Ignore(u => u.TwoFactorEnabled);
+				entity.Ignore(u => u.AccessFailedCount);
+				entity.Ignore(u => u.EmailConfirmed);
+				entity.Ignore(u => u.PhoneNumberConfirmed);
+				entity.Ignore(u => u.LockoutEnabled);
+				entity.Ignore(u => u.LockoutEnd);
+			});
 
+
+		}
 
 	}
 }
