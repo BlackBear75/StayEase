@@ -1,4 +1,5 @@
 ﻿using StayEase.Model.Entity.BaseResponce;
+using StayEase.Model.Entity.Booking;
 using StayEase.Model.ViewModel;
 
 namespace StayEase.Service.Interface
@@ -7,10 +8,10 @@ namespace StayEase.Service.Interface
 	{
 		Task<IBaseResponse<bool>> AddBooking(BookingViewModel entity, Guid userid, Guid accommodationid);
 
-		Task<IBaseResponse<BookingViewModel>> GetBooking(Guid id);
-		Task<IBaseResponse<IEnumerable<BookingViewModel>>> SelectBooking();
-
+		Task<IBaseResponse<AccommodatiowithBookingModel>> GetBooking(Guid id);
+		Task<IBaseResponse<IEnumerable<AccommodatiowithBookingModel>>> SelectBooking();
+		Task<IBaseResponse<IEnumerable<AccommodatiowithBookingModel>>> SelectUserBooking(Guid id);
 		Task<IBaseResponse<bool>> DeleteBooking(Guid id);
-		Task<IBaseResponse<bool>> UpdateBooking(Guid id, BookingViewModel entity);
+		
 	}
 }

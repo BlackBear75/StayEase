@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StayEase.Model.Entity.User;
 using StayEase.Model.ViewModel;
@@ -78,7 +79,6 @@ namespace StayEase.Controllers
 		}
 
 		[HttpPut("{id}")]
-
 		public async Task<IActionResult> UpdateAccommodation(Guid id, AccomodationViewModel accomodation)
 		{
 			try

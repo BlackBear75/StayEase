@@ -56,19 +56,7 @@ namespace StayEase.Database.Repository
 			return await _db.BookingModels.ToListAsync();
 		}
 
-		public async Task<bool> UpdateBooking(BookingModel entity)
-		{
-			try
-			{
-				_db.BookingModels.Update(entity);
-				await _db.SaveChangesAsync();
-				return true;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-		}
+		
 		public async Task<bool> IsAccommodationAvailable(Guid accommodationId, BookingViewModel bookingView)
 		{
 			var bookings = await _db.BookingModels.Where(b => b.AccommodationId == accommodationId).ToListAsync();
@@ -118,6 +106,12 @@ namespace StayEase.Database.Repository
 			return availableDates;
 		}
 
-
+		public async Task<IEnumerable<BookingModel>> SelectUserBooking(Guid id)
+		{
+			var userBookings = await _db.BookingModels
+									   .Where(b => b.UserId == id) 
+									   .ToListAsync(); 
+			return userBookings;
+		}
 	}
 }

@@ -13,8 +13,11 @@ namespace StayEase.Database.Interface
 		Task<bool> IsAccommodationAvailable(Guid accommodationId, BookingViewModel bookingView);
 		Task<BookingModel> GetBooking(Guid id);
 		Task<IEnumerable<BookingModel>> SelectBooking();
+	
+		Task<IEnumerable<BookingModel>> SelectUserBooking(Guid id);
+
 		Task<List<DateTime>> GetAvailableDates(Guid accommodationId, BookingViewModel bookingView);
 		Task<bool> DeleteBooking(BookingModel entity);
-		Task<bool> UpdateBooking(BookingModel entity);
+		
 	}
 }
